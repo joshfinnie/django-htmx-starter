@@ -1,0 +1,29 @@
+{% load static %}
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Django HTMX Starter - {% block head_title %}Build fast!{% endblock %}</title>
+        <script src="{% static 'js/htmx.min.js' %}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="min-h-screen bg-white dark:bg-gray-900">
+        {% include "partials/header.html" %}
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="flex items-center px-4 py-3 text-sm font-bold text-white bg-blue-500" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <main>{% block content %}{% endblock %}</main>
+        {% include "partials/footer.html" %}
+    </body>
+</html>
